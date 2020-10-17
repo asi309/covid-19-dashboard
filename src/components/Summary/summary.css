@@ -1,0 +1,77 @@
+div.summary {
+  display: flex;
+}
+
+div.summary div.card {
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  width: 130px;
+  border-radius: 3px;
+  align-items: center;
+}
+
+div.card p.heading {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+div.card p.change {
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+div.card p.total {
+  margin-top: 7px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.card--confirmed {
+  color: #e90000;
+}
+
+.card--confirmed p.change {
+  color: #e90000b6;
+}
+
+div.summary div.card--confirmed:hover {
+  background-color: #f59e9ec4;
+}
+
+.card--active {
+  color: #0075eb;
+}
+
+.card--active p.change {
+  color: #0076ebb6;
+}
+
+div.summary div.card--active:hover {
+  background-color: #9cbfe2c4;
+}
+
+.card--recovered {
+  color: #15B325;
+}
+
+.card--recovered p.change {
+  color: #15b325b6;
+}
+
+div.summary div.card--recovered:hover {
+  background-color: #aedbb2cc;
+}
+
+.card--deceased {
+  color: #808080;
+}
+
+.card--deceased p.change {
+  color: #868686b6;
+}
+
+div.summary div.card--deceased:hover {
+  background-color: #d8d8d8ce;
+}
