@@ -21,6 +21,7 @@ div.search div.search-input {
 
 div.search-input .search-bar {
   border: none;
+  background-color: white;
   box-sizing: border-box;
   height: 50px;
   margin-left: 6px;
@@ -28,4 +29,5 @@ div.search-input .search-bar {
   color: #6d6969d2;
   font-size: 18px;
   font-weight: 400;
+  -webkit-appearance: none;
 }
