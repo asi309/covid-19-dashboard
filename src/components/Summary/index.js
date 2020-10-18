@@ -10,7 +10,6 @@ export default function Summary({ history }) {
   useEffect(() => {
     const fetchData = async () => {
       const response = await api.get('summary');
-      console.log(response);
       setGlobalData(response.data['Global']);
     };
     fetchData();

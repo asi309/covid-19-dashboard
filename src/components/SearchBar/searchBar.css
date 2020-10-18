@@ -1,0 +1,31 @@
+div.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+div.search label {
+  color: #6d6969d2;
+}
+
+div.search div.search-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  padding: 10px;
+  margin-top: 15px;
+  box-shadow: 3px 10px 30px #bebcbca6;
+}
+
+div.search-input .search-bar {
+  border: none;
+  box-sizing: border-box;
+  height: 50px;
+  margin-left: 6px;
+  padding: 0 10px;
+  color: #6d6969d2;
+  font-size: 18px;
+  font-weight: 400;
+}
