@@ -32,19 +32,16 @@ export default function Details({ data }) {
     const date = Date.parse(d['Date']);
     return { x: date, y: d['Confirmed'] };
   });
-  const activeData = data.map((d) => {
-    const date = new Date(d['Date']);
-    const dateString = `${date.getDate()}`;
-    // const dateString = `${date.getDate()} ${date.getMonth()}, ${date.getFullYear()}`;
-    return { x: parseInt(dateString), y: d['Active'] };
+  const activeData = data.slice(startIdx).map((d) => {
+    const date = Date.parse(d['Date']);
+    return { x: date, y: d['Active'] };
   });
-  const recoveredData = data.map((d) => {
-    const date = new Date(d['Date']);
-    const dateString = `${date.getDate()} ${date.getMonth()}, ${date.getFullYear()}`;
-    return { x: dateString, y: d['Recovered'] };
+  const recoveredData = data.slice(startIdx).map((d) => {
+    const date = Date.parse(d['Date']);
+    return { x: date, y: d['Recovered'] };
   });
-  const deathsData = data.map((d) => {
-    const date = Date.parse(d['Date'].slice(0, 9));
+  const deathsData = data.slice(startIdx).map((d) => {
+    const date = Date.parse(d['Date']);
     return { x: date, y: d['Deaths'] };
   });
 
@@ -71,7 +68,7 @@ export default function Details({ data }) {
   };
 
   const recoveredMouseLeaveHandler = () => setRecoveredPlotValues({});
-  
+
   const deathNearestXYHandler = (value) => {
     const date = new Date(value.x);
     const dateString = `${date.getDate()} ${monthList[date.getMonth()]}`;
@@ -149,7 +146,7 @@ export default function Details({ data }) {
               <LineSeries
                 curve={null}
                 color="#0075ebb6"
-                data={confirmedData}
+                data={activeData}
                 opacity={1}
                 strokeStyle="solid"
                 onNearestXY={activeNearestXYHandler}
@@ -185,7 +182,7 @@ export default function Details({ data }) {
               <LineSeries
                 curve={null}
                 color="#15B325b6"
-                data={confirmedData}
+                data={recoveredData}
                 opacity={1}
                 strokeStyle="solid"
                 onNearestXY={recoveredNearestXYHandler}
@@ -221,7 +218,7 @@ export default function Details({ data }) {
               <LineSeries
                 curve={null}
                 color="#868686b6"
-                data={confirmedData}
+                data={deathsData}
                 opacity={1}
                 strokeStyle="solid"
                 onNearestXY={deathNearestXYHandler}
@@ -234,21 +231,21 @@ export default function Details({ data }) {
       )}
       {data.length !== 0 ? (
         <div className="buttons">
-          <button
-            onClick={() => 
-              setStartIdx(data.length - 30 >= 0 ? data.length - 30 : 0)
-            }
-          >
-            1 month
-          </button>
-          <button
+          <button id="all" onClick={() => setStartIdx(0)}>All</button>
+          <button id="last3"
             onClick={() =>
               setStartIdx(data.length - 90 >= 0 ? data.length - 90 : 0)
             }
           >
             3 months
           </button>
-          <button onClick={() => setStartIdx(0)}>All</button>
+          <button id="last1"
+            onClick={() =>
+              setStartIdx(data.length - 30 >= 0 ? data.length - 30 : 0)
+            }
+          >
+            1 month
+          </button>
         </div>
       ) : (
         ''
@@ -256,5 +253,3 @@ export default function Details({ data }) {
     </div>
   );
 }
-
-//tickFormat={t => t.substring(0, t.length - 5)}

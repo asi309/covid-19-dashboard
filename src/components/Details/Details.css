@@ -72,6 +72,16 @@ div.graph--deaths div.stats {
   color: #868686;
 }
 
-/* div.buttons button {
+div.buttons button {
+  border: none;
+  background-color: #f7c72bd8;
+  height: 50px;
+  font-size: 14px;
+  padding: 5px 16px 5px 16px;
+  margin-bottom: 50px;
+  margin-top: 20px;
+}
 
-} */
+div.buttons button:focus{
+  background-color: #f0bd17;
+}
