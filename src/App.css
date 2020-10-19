@@ -11,6 +11,41 @@ body,
 }
 
 div.App {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
+}
+
+div.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0 30px 0;
+}
+
+div.search label {
+  color: #6d6969d2;
+}
+
+div.search div.search-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  padding: 10px;
+  margin-top: 40px;
+  box-shadow: 3px 10px 30px #bebcbca6;
+}
+
+div.search-input .search-bar {
+  border: none;
+  background-color: white;
+  box-sizing: border-box;
+  height: 50px;
+  margin-left: 6px;
+  padding: 0 10px;
+  color: #6d6969d2;
+  font-size: 18px;
+  font-weight: 400;
+  -webkit-appearance: none;
 }

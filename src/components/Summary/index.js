@@ -4,59 +4,69 @@ import api from '../../services/api';
 
 import './summary.css';
 
-export default function Summary({ history }) {
-  const [globalData, setGlobalData] = useState({});
+export default function Summary({ country }) {
+  const [data, setData] = useState({});
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (country = '') => {
       const response = await api.get('summary');
-      setGlobalData(response.data['Global']);
+      if (country) {
+        const countries = response.data['Countries'];
+        const filteredCountry = countries.filter((c) => c['Slug'] === country);
+        setData(filteredCountry[0]);
+      } else {
+        setData(response.data['Global']);
+      }
     };
-    fetchData();
-  }, []);
+    fetchData(country);
+  }, [country]);
 
   return (
     <div className="summary">
       <div className="card card--confirmed">
         <p className="heading">Confirmed</p>
         <p className="change">
-          {globalData['NewConfirmed'] > 0
-            ? `+${globalData['NewConfirmed']}`
+          {data
+            ? data['NewConfirmed'] > 0
+              ? `+${data['NewConfirmed']}`
+              : ''
             : ''}
         </p>
-        <p className="total">{globalData['TotalConfirmed']}</p>
+        <p className="total">{data ? data['TotalConfirmed'] : 0}</p>
       </div>
       <div className="card card--active">
         <p className="heading">Active</p>
         <p className="change">
-          {globalData['NewConfirmed'] -
-            globalData['NewRecovered'] -
-            globalData['NewDeaths'] >
-          0
-            ? `+${
-                globalData['NewConfirmed'] -
-                globalData['NewRecovered'] -
-                globalData['NewDeaths']
-              }`
+          {data
+            ? data['NewConfirmed'] - data['NewRecovered'] - data['NewDeaths'] >
+              0
+              ? `+${
+                  data['NewConfirmed'] -
+                  data['NewRecovered'] -
+                  data['NewDeaths']
+                }`
+              : ''
             : ''}
         </p>
-        <p className="total">{globalData['TotalConfirmed']}</p>
+        <p className="total">{data ? data['TotalConfirmed'] : 0}</p>
       </div>
       <div className="card card--recovered">
         <p className="heading">Recovered</p>
         <p className="change">
-          {globalData['NewRecovered'] > 0
-            ? `+${globalData['NewRecovered']}`
+          {data
+            ? data['NewRecovered'] > 0
+              ? `+${data['NewRecovered']}`
+              : ''
             : ''}
         </p>
-        <p className="total">{globalData['TotalRecovered']}</p>
+        <p className="total">{data ? data['TotalRecovered'] : 0}</p>
       </div>
       <div className="card card--deceased">
         <p className="heading">Deceased</p>
         <p className="change">
-          {globalData['NewDeaths'] > 0 ? `+${globalData['NewDeaths']}` : ''}
+          {data ? (data['NewDeaths'] > 0 ? `+${data['NewDeaths']}` : '') : ''}
         </p>
-        <p className="total">{globalData['TotalDeaths']}</p>
+        <p className="total">{data ? data['TotalDeaths'] : 0}</p>
       </div>
     </div>
   );

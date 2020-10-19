@@ -1,0 +1,77 @@
+div.details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+div.details div.graph {
+  display: flex;
+  position: relative;
+  align-self: center;
+  border-radius: 3px;
+  max-width: 100%;
+  margin-bottom: 30px;
+}
+
+div.graph div.stats {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 50px;
+  top: 8px;
+}
+
+div.stats p.heading {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+}
+
+div.stats p.x-value {
+  font-size: 12px;
+  font-weight: 700;
+  margin: 0;
+}
+
+div.stats p.y-value {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+
+div.graph--confirmed {
+  background-color: #f59e9ec4;
+}
+
+div.graph--confirmed div.stats {
+  color: #ec0c0cde;
+}
+
+div.graph--active {
+  background-color: #9cbfe2c4;
+}
+
+div.graph--active div.stats {
+  color: #036bd3d8;
+}
+
+div.graph--recovered {
+  background-color: #aedbb2cc;
+}
+
+div.graph--recovered div.stats {
+  color: #10aa20f1;
+}
+
+div.graph--deaths {
+  background-color: #d8d8d8ce;
+}
+
+div.graph--deaths div.stats {
+  color: #868686;
+}
+
+/* div.buttons button {
+
+} */
