@@ -2,13 +2,15 @@ div.summary {
   display: flex;
   justify-content: center;
   margin-top: 30px;
+  max-width: 100%;
 }
 
 div.summary div.card {
   display: flex;
   flex-direction: column;
   height: 150px;
-  width: 130px;
+  max-width: 180px;
+  padding: 0 20px;
   border-radius: 3px;
   align-items: center;
 }
@@ -76,4 +78,11 @@ div.summary div.card--recovered:hover {
 
 div.summary div.card--deceased:hover {
   background-color: #d8d8d8ce;
+}
+
+@media(max-width: 420px) {
+  div.summary {
+    flex-direction: column;
+    align-items: center;
+  }
 }

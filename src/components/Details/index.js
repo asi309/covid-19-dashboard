@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { LineSeries, XAxis, XYPlot, YAxis } from 'react-vis';
+import { LineSeries, XAxis, FlexibleXYPlot, YAxis } from 'react-vis';
 import { format } from 'd3-format';
 
 import './Details.css';
 
 export default function Details({ data }) {
-  const width = 600;
+  const width = 500;
   const height = 180;
   const monthList = [
     'January',
@@ -87,20 +87,19 @@ export default function Details({ data }) {
               <p className="x-value">{confirmedPlotValues['Date']}</p>
               <p className="y-value">{confirmedPlotValues['Confirmed']}</p>
             </div>
-            <XYPlot
+            <FlexibleXYPlot
               xType="time"
-              width={width}
-              height={height}
               onMouseLeave={confirmedMouseLeaveHandler}
             >
               <XAxis
-                tickTotal={7}
+                tickTotal={window.innerWidth > 420 ? 7 : 4}
                 style={{
                   line: { stroke: '#e90000' },
                   ticks: { stroke: '#e90000b6' },
                 }}
               />
               <YAxis
+                tickTotal={window.innerWidth > 420 ? 5 : 3}
                 tickFormat={(t) => format('.2s')(t)}
                 style={{
                   line: { stroke: '#e90000' },
@@ -115,7 +114,7 @@ export default function Details({ data }) {
                 strokeStyle="solid"
                 onNearestXY={confirmedNearestXYHandler}
               />
-            </XYPlot>
+            </FlexibleXYPlot>
           </div>
           <div className="graph graph--active">
             <div className="stats">
@@ -123,20 +122,16 @@ export default function Details({ data }) {
               <p className="x-value">{activePlotValues['Date']}</p>
               <p className="y-value">{activePlotValues['Confirmed']}</p>
             </div>
-            <XYPlot
-              xType="time"
-              width={width}
-              height={height}
-              onMouseLeave={activeMouseLeaveHandler}
-            >
+            <FlexibleXYPlot xType="time" onMouseLeave={activeMouseLeaveHandler}>
               <XAxis
-                tickTotal={7}
+                tickTotal={window.innerWidth > 420 ? 7 : 4}
                 style={{
                   line: { stroke: '#0075eb' },
                   ticks: { stroke: '#0076ebb6' },
                 }}
               />
               <YAxis
+                tickTotal={window.innerWidth > 420 ? 5 : 3}
                 tickFormat={(t) => format('.2s')(t)}
                 style={{
                   line: { stroke: '#0075eb' },
@@ -151,7 +146,7 @@ export default function Details({ data }) {
                 strokeStyle="solid"
                 onNearestXY={activeNearestXYHandler}
               />
-            </XYPlot>
+            </FlexibleXYPlot>
           </div>
           <div className="graph graph--recovered">
             <div className="stats">
@@ -159,20 +154,19 @@ export default function Details({ data }) {
               <p className="x-value">{recoveredPlotValues['Date']}</p>
               <p className="y-value">{recoveredPlotValues['Confirmed']}</p>
             </div>
-            <XYPlot
+            <FlexibleXYPlot
               xType="time"
-              width={width}
-              height={height}
               onMouseLeave={recoveredMouseLeaveHandler}
             >
               <XAxis
-                tickTotal={7}
+                tickTotal={window.innerWidth > 420 ? 7 : 4}
                 style={{
                   line: { stroke: '#15b325' },
                   ticks: { stroke: '#15b325b6' },
                 }}
               />
               <YAxis
+                tickTotal={window.innerWidth > 420 ? 5 : 3}
                 tickFormat={(t) => format('.2s')(t)}
                 style={{
                   line: { stroke: '#15B325' },
@@ -187,7 +181,7 @@ export default function Details({ data }) {
                 strokeStyle="solid"
                 onNearestXY={recoveredNearestXYHandler}
               />
-            </XYPlot>
+            </FlexibleXYPlot>
           </div>
           <div className="graph graph--deaths">
             <div className="stats">
@@ -195,20 +189,16 @@ export default function Details({ data }) {
               <p className="x-value">{deathPlotValues['Date']}</p>
               <p className="y-value">{deathPlotValues['Confirmed']}</p>
             </div>
-            <XYPlot
-              xType="time"
-              width={width}
-              height={height}
-              onMouseLeave={deathMouseLeaveHandler}
-            >
+            <FlexibleXYPlot xType="time" onMouseLeave={deathMouseLeaveHandler}>
               <XAxis
-                tickTotal={7}
+                tickTotal={window.innerWidth > 420 ? 7 : 4}
                 style={{
                   line: { stroke: '#808080' },
                   ticks: { stroke: '#868686b6' },
                 }}
               />
               <YAxis
+                tickTotal={window.innerWidth > 420 ? 5 : 3}
                 tickFormat={(t) => format('.2s')(t)}
                 style={{
                   line: { stroke: '#808080' },
@@ -223,7 +213,7 @@ export default function Details({ data }) {
                 strokeStyle="solid"
                 onNearestXY={deathNearestXYHandler}
               />
-            </XYPlot>
+            </FlexibleXYPlot>
           </div>
         </>
       ) : (
@@ -231,15 +221,19 @@ export default function Details({ data }) {
       )}
       {data.length !== 0 ? (
         <div className="buttons">
-          <button id="all" onClick={() => setStartIdx(0)}>All</button>
-          <button id="last3"
+          <button id="all" onClick={() => setStartIdx(0)} autoFocus>
+            All
+          </button>
+          <button
+            id="last3"
             onClick={() =>
               setStartIdx(data.length - 90 >= 0 ? data.length - 90 : 0)
             }
           >
             3 months
           </button>
-          <button id="last1"
+          <button
+            id="last1"
             onClick={() =>
               setStartIdx(data.length - 30 >= 0 ? data.length - 30 : 0)
             }
