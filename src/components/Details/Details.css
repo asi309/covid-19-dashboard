@@ -88,7 +88,7 @@ div.buttons button:focus{
   background-color: #f0bd17;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 480px) {
   div.details {
     min-width: 100%;
   }

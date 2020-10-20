@@ -80,7 +80,7 @@ div.summary div.card--deceased:hover {
   background-color: #d8d8d8ce;
 }
 
-@media(max-width: 420px) {
+@media(max-width: 480px) {
   div.summary {
     flex-direction: column;
     align-items: center;
