@@ -14,10 +14,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await api.get('countries');
-      const countryList = response.data.sort(
-        (a, b) => b['Country'] - a['Country']
-      );
-      setCountries(countryList);
+      setCountries(response.data);
     };
 
     fetchData();
@@ -59,11 +56,19 @@ function App() {
             onChange={(e) => setSearchTerm(e.target.value)}
           >
             <option value="">Select Country</option>
-            {countries.map((country) => (
-              <option key={country['ISO2']} value={country['Slug']}>
-                {country['Country']}
-              </option>
-            ))}
+            {countries
+              .sort((a, b) =>
+                a.Country.toLowerCase() > b.Country.toLowerCase()
+                  ? 1
+                  : b.Country.toLowerCase() > a.Country.toLowerCase()
+                  ? -1
+                  : 0
+              )
+              .map((country) => (
+                <option key={country['ISO2']} value={country['Slug']}>
+                  {country['Country']}
+                </option>
+              ))}
           </select>
         </div>
       </div>
